@@ -4,33 +4,53 @@ import {
 } from 'carbon-components-react';
 import styled from 'styled-components';
 import "./WorkFlow.css";
-import {Add16}  from '@carbon/icons-react';
+import {Add16,CheckmarkFilled32,TrashCan32,Edit32}  from '@carbon/icons-react';
 import {useDispatch,useSelector } from 'react-redux';
 import { push as pushRoute } from "connected-react-router";
 import {PageRoutes} from '../Constants/constants';
-import {createWorkFlow} from '../duck/actions';
+import {createWorkFlow,changeWorkflowStatus,editWorkFlowItem,deleteWorkItem} from '../duck/actions';
+import{getWorkFlowList} from '../duck/selectors';
 
 const WorkFlowListPane =()=>{
   
   const  [search,setSearchValue]=useState("");
-  const  filterCategory = ["All","Pending","Completed"];
+  const [filterType,setFilterType]=useState('All');
+  const  filterCategory = [{type:"All",value:"All"},{type:"Pending",value:0},{type:"Completed",value:2}];
   const dispatch = useDispatch();
-
+  const workFlowList = useSelector(getWorkFlowList);
 
   const renderWorkFlowList = workFlow => {
-    //const { search } = this.state;
-    let code = '';
-    return (
-        <div className='rest'>
-        <div >
-        <h4>Sample</h4>
-        <br />
-        <p>Test</p>
-        <p>Test2</p>
-        <br />
-        </div>
-        </div>
-    );
+    const status = (workFlow.status === 0 ? "PENDING": (workFlow.status === 2?"COMPLETED":"PENDING"));
+  let colorClass = '';
+  if(status === "PENDING")
+  {
+    colorClass = 'grey';
+  }else {
+    colorClass = 'green';
+  }
+  const changeStatus = (taskId)=>()=>{
+    dispatch(changeWorkflowStatus({taskId}));
+  };
+  const removeWorkItem = (taskId)=>()=>{
+    dispatch(deleteWorkItem({taskId}));
+  }
+  const editWorkItem = (taskId)=>()=>{
+    dispatch(editWorkFlowItem({taskId}));
+  }
+  let checkmark_class = 'workFlowCheckMark '+colorClass;
+  return (
+      <div className='rest' onClick={changeStatus(workFlow.id)}>
+        <Edit32 className='workFlowIcons editIcon' onClick={editWorkItem(workFlow.id)}/>
+        <TrashCan32 className='workFlowIcons deleteIcon' onClick={removeWorkItem(workFlow.id)}/>
+        <CheckmarkFilled32 className={checkmark_class}/>
+      <div style={{padding:'10px'}}>
+      <h4>{workFlow.name}</h4>
+      <br />
+      <p>{status}</p>
+      <br />
+      </div>
+      </div>
+  );
   };
   const addWorkFlow=e=>{
     dispatch(createWorkFlow());
@@ -38,16 +58,16 @@ const WorkFlowListPane =()=>{
 
   }
   const optionSelected=(e)=>{
-
+    setFilterType(e.target.value);
   }
   const onchange = e => {
-    //this.setState({ search: e.target.value });
+    setSearchValue(e.target.value);
   };
 //    const { search } = this.state;
-    const filteredWorkFlows = [1,2,3,4];
-    // countriesList.filter(country => {
-    //   return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-    // });
+    const filteredWorkFlows = workFlowList.filter(workFlow => {
+      return (workFlow.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 &&
+              (workFlow.status == filterType || filterType === 'All'))
+    });
 
     return (
       <div >
@@ -63,9 +83,8 @@ const WorkFlowListPane =()=>{
               </div>              
               <div>
             <select id="restfilter" onChange={optionSelected}>
-              <option value="any">Choose Any</option>
-              {filterCategory.map(type => {
-                return <option value={type}>{type}</option>;
+              {filterCategory.map(filterType => {
+                return <option value={filterType.value}>{filterType.type}</option>;
               })}
             </select>
           </div>

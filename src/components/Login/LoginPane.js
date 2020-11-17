@@ -3,7 +3,7 @@ import {useDispatch,useSelector } from 'react-redux';
 import { push as pushRoute } from "connected-react-router";
 import {PageRoutes} from '../Constants/constants';
 import loginStyle from './Login.css';
-
+import {login} from '../duck/actions';
 const LoginPane = ()=>{
 
   const [username, setUserName] = useState('');
@@ -16,6 +16,7 @@ const handleLogin = (e) => {
     if(username && password)
     {
         setError(null);
+        dispatch(login());
         dispatch(pushRoute(PageRoutes.workflow));
 
     }else{

@@ -12,3 +12,5 @@ const getState = path(['appReducers']);
 export const getWorkFlowList = state => getState(state).workFlowList;
 
 export const getEditingWorkFlowItem = state => getState(state).editingWorkFlowItem;
+
+export const getLoggedInStatus = state => getState(state).loggedInStatus;

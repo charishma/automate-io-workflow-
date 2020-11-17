@@ -8,11 +8,15 @@ const PREFIX = 'FLOWAPP';
  */
 export const login = createAction(`${PREFIX}/LOGIN`);
 
+export const logout = createAction(`${PREFIX}/LOGOUT`);
+
 export const addTaskNode = createAction(`${PREFIX}/ADD_TASK_NODE`);
 
 export const createWorkFlow = createAction(`${PREFIX}/CREATE_WORK_FLOW`);
 
-export const editWorkFlow = createAction(`${PREFIX}/EDIT_WORK_FLOW`);
+export const editWorkFlowItem = createAction(`${PREFIX}/EDIT_WORK_FLOW`);
+
+export const deleteWorkItem = createAction(`${PREFIX}/DELETE_WORK_FLOW`);
 
 export const deleteTaskNode = createAction(`${PREFIX}/DELETE_TASK_NODE`);
 
@@ -25,4 +29,3 @@ export const shuffleTaskNodes = createAction(`${PREFIX}/SHUFFLE_TASK_NODES`);
 export const saveWorkFlow = createAction(`${PREFIX}/SAVE_WORKLOW`);
 
 export const updateWorkFlow = createAction(`${PREFIX}/UPDATE_WORKLOW`);
-
