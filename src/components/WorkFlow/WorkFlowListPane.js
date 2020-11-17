@@ -39,7 +39,7 @@ const WorkFlowListPane =()=>{
   }
   let checkmark_class = 'workFlowCheckMark '+colorClass;
   return (
-      <div className='rest' onClick={changeStatus(workFlow.id)}>
+      <div className='list' onClick={changeStatus(workFlow.id)}>
         <Edit32 className='workFlowIcons editIcon' onClick={editWorkItem(workFlow.id)}/>
         <TrashCan32 className='workFlowIcons deleteIcon' onClick={removeWorkItem(workFlow.id)}/>
         <CheckmarkFilled32 className={checkmark_class}/>
@@ -73,7 +73,7 @@ const WorkFlowListPane =()=>{
       <div >
         <main >
           <div className="container">
-          <div className="restfilter">
+          <div className="listfilter">
               <div>
                 <TextInput className='searchContainer'
                   placeholder="Search WorkFlows"
@@ -82,7 +82,7 @@ const WorkFlowListPane =()=>{
                 />
               </div>              
               <div>
-            <select id="restfilter" onChange={optionSelected}>
+            <select id="listfilterSelect" onChange={optionSelected}>
               {filterCategory.map(filterType => {
                 return <option value={filterType.value}>{filterType.type}</option>;
               })}
@@ -93,7 +93,8 @@ const WorkFlowListPane =()=>{
                   Create WorkFlow</Button>
           </div>
             </div>
-            <div className='restcontainer'>
+            <hr />
+            <div className='listcontainer'>
             {filteredWorkFlows.map(workFlow => {
                         return renderWorkFlowList(workFlow);
                     })}

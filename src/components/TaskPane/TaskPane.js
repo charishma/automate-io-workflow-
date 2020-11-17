@@ -40,7 +40,7 @@ const renderTaskNodeList = taskNode => {
   
   let checkmark_class = 'checkMark '+colorClass;
   return (
-      <div className='rest' onClick={changeStatus(taskNode.id)}>
+      <div className='list' onClick={changeStatus(taskNode.id)}>
         <CheckmarkFilled32 className={checkmark_class}/>
       <div style={{padding:'10px'}}>
       <h4>{taskNode.name}</h4>
@@ -64,7 +64,7 @@ const shuffleNodesData = ()=>{
 const taskNodeArray = workFlowItem?workFlowItem.tasknode:[];
     return (
         <div className="container">
-          <div className="restfilter">
+          <div className="listfilter">
               <div>
                 <TextInput className='searchContainer'
                   placeholder="Enter WorkFlow name"
@@ -86,7 +86,8 @@ const taskNodeArray = workFlowItem?workFlowItem.tasknode:[];
               <Button className='taskFlowBtn primary' name="primary" size="lg" onClick={saveCurrentWorkFlow}>Save</Button>
           </div>
             </div>
-            <div className='restcontainer'>
+            <hr/>
+            <div className='listcontainer'>
             {taskNodeArray && taskNodeArray.map(taskNode => {
                         return renderTaskNodeList(taskNode);
                     })}
