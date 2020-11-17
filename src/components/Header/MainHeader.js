@@ -8,14 +8,17 @@ float: left;
 `;
 const ImageDiv = styled.div`
 float: left;
-    width: 32px;
-    height: 32px;
-    margin-top: 21px;
+    margin: 21px 20px 0px 22px;
+    background-color: #a900b0;
+svg.login-class {
+    fill: white;
+  }
 `;
 const Header = ({ children }) => (
     <StyledDiv>
         <ImageDiv>    
-            <Button hasIconOnly   renderIcon={ParentChild16}  size="lg" />
+        <ParentChild16 aria-label="" className="login-class" />
+            {/* <Button hasIconOnly   className="login-class" renderIcon={ParentChild16}  size="lg" /> */}
          </ImageDiv>
     
     <h3 style={{color:'white'}}>FLOWAPP</h3>

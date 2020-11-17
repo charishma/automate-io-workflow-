@@ -8,6 +8,7 @@ import {Add16}  from '@carbon/icons-react';
 import {useDispatch,useSelector } from 'react-redux';
 import { push as pushRoute } from "connected-react-router";
 import {PageRoutes} from '../Constants/constants';
+import {createWorkFlow} from '../duck/actions';
 
 const WorkFlowListPane =()=>{
   
@@ -31,8 +32,9 @@ const WorkFlowListPane =()=>{
         </div>
     );
   };
-  const createWorkFlow=e=>{
-    dispatch(pushRoute(PageRoutes.taskflow));
+  const addWorkFlow=e=>{
+    dispatch(createWorkFlow());
+    //dispatch(pushRoute(PageRoutes.taskflow));
 
   }
   const optionSelected=(e)=>{
@@ -68,7 +70,7 @@ const WorkFlowListPane =()=>{
             </select>
           </div>
           <div>
-              <Button className='workFlowBtn' renderIcon={Add16}  size="lg" onClick={createWorkFlow}>
+              <Button className='workFlowBtn' renderIcon={Add16}  size="lg" onClick={addWorkFlow}>
                   Create WorkFlow</Button>
           </div>
             </div>

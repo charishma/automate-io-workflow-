@@ -1,17 +1,18 @@
 
 import {all} from 'redux-saga/effects';
+import appReducers from './reducers';
+import flowAppSaga from './saga';
+import * as actions from './actions';
 
 export const rootReducers = {
-    // loginReducer,
-    // WorkFlowReducer,
-    // TaskFlowReducer
+    appReducers
 };
 
 export function* rootSaga() {
     yield all([
-        // loginSaga(),
-        // workFlowSaga(),
-        // TaskFlowSaga(),
+        flowAppSaga()
     ]);
 }
-
+export const appActions = {
+    ...actions,
+};

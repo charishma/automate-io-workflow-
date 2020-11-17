@@ -87,3 +87,17 @@
 .danger{
     background-color: red;
 }
+svg.grey {
+    fill: gray;
+  }
+  svg.green {
+    fill: green;
+  }
+  svg.blue {
+    fill: #3a5cd9;
+  }
+  .checkMark{
+    position: relative;
+    left: 423px;
+    top: -14px;
+  }
